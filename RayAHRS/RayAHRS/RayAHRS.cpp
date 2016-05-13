@@ -130,6 +130,7 @@ int _tmain(int argc, _TCHAR* argv[])
 		Gx[k]*=(PI/180.0f);
 		Gy[k]*=(PI/180.0f);
 		Gz[k]*=(PI/180.0f);
+
 		MahonyAHRSupdateIMU( Gx[k], Gy[k], Gz[k], Ax[k], Ay[k], Az[k]);
 		quatern2euler( q0,  q1,  q2,  q3) ;
 		

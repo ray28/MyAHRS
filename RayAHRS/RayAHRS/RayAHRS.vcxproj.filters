@@ -30,6 +30,9 @@
     <ClInclude Include="quatern2euler.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="EKF.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
