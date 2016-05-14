@@ -128,16 +128,20 @@ fprintf(fid,'%f\n',Temp);
 fclose(fid);
 
 %% Read data
-fid = fopen('C:\\Users\\zhaohui11\\Desktop\\AHRS\\RayAHRS\\RayAHRS\\output\\Psi.txt','r');
+fid = fopen('D:\\github\\MyAHRS\\RayAHRS\\RayAHRS\\output\\Phi.txt','r');
 Qq0=fscanf(fid,'%f');
+fclose(fid);
+fid = fopen('D:\\github\\MyAHRS\\RayAHRS\\RayAHRS\\output\\Theta.txt','r');
+Qq1=fscanf(fid,'%f');
 fclose(fid);
 figure('Name', 'q');
 hold on;
     %plot(time, quaternion(:,4), 'r');
     %plot(time, Qq0, 'b');
-    plot(time, euler(:,3), 'r');
-    plot(time, Qq0, 'b');
+    plot(time, euler(:,1), 'r');
+    plot(time, Qq0, 'g');
+   %plot(time, Qq1, 'b');
 hold off;
-
+disp(var(Qq1-euler(:,2)));
 
 %% End of script

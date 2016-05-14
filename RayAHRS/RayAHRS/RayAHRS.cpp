@@ -10,6 +10,7 @@
 #include <vector>
 #include "MahonyAHRS.h"
 #include "quatern2euler.h"
+#include "EKF.h"
 
 using namespace std;
 
@@ -131,28 +132,34 @@ int _tmain(int argc, _TCHAR* argv[])
 		Gy[k]*=(PI/180.0f);
 		Gz[k]*=(PI/180.0f);
 
+		/*	
 		MahonyAHRSupdateIMU( Gx[k], Gy[k], Gz[k], Ax[k], Ay[k], Az[k]);
 		quatern2euler( q0,  q1,  q2,  q3) ;
-		
+	*/
+		EKF(Gx[k], Gy[k], Gz[k], Ax[k], Ay[k], Az[k]);
+
 		//Qq0.push_back((float)Gx[k]);
 		Qq0.push_back((float)q0);
 		Qq1.push_back((float)q1);
 		Qq2.push_back((float)q2);
 		Qq3.push_back((float)q3);
-
+	/*	
 		Pphi.push_back((float)phi);
 		Ttheta.push_back((float)theta);
+		Ppsi.push_back((float)psi);*/
+		Pphi.push_back((float)phi_Karman);
+		Ttheta.push_back((float)theta_Karman);
 		Ppsi.push_back((float)psi);
 	}
 	
-	WriteData(Qq0,count,"C:\\Users\\zhaohui11\\Desktop\\AHRS\\RayAHRS\\RayAHRS\\output\\Q0.txt");
-	WriteData(Qq1,count,"C:\\Users\\zhaohui11\\Desktop\\AHRS\\RayAHRS\\RayAHRS\\output\\Q1.txt");
-	WriteData(Qq2,count,"C:\\Users\\zhaohui11\\Desktop\\AHRS\\RayAHRS\\RayAHRS\\output\\Q2.txt");
-	WriteData(Qq3,count,"C:\\Users\\zhaohui11\\Desktop\\AHRS\\RayAHRS\\RayAHRS\\output\\Q3.txt");
+	WriteData(Qq0,count,"D:\\github\\MyAHRS\\RayAHRS\\RayAHRS\\output\\Q0.txt");
+	WriteData(Qq1,count,"D:\\github\\MyAHRS\\RayAHRS\\RayAHRS\\output\\Q1.txt");
+	WriteData(Qq2,count,"D:\\github\\MyAHRS\\RayAHRS\\RayAHRS\\output\\Q2.txt");
+	WriteData(Qq3,count,"D:\\github\\MyAHRS\\RayAHRS\\RayAHRS\\output\\Q3.txt");
 
-	WriteData(Pphi,count,"C:\\Users\\zhaohui11\\Desktop\\AHRS\\RayAHRS\\RayAHRS\\output\\Phi.txt");
-	WriteData(Ttheta,count,"C:\\Users\\zhaohui11\\Desktop\\AHRS\\RayAHRS\\RayAHRS\\output\\Theta.txt");
-	WriteData(Ppsi,count,"C:\\Users\\zhaohui11\\Desktop\\AHRS\\RayAHRS\\RayAHRS\\output\\Psi.txt");
+	WriteData(Pphi,count,"D:\\github\\MyAHRS\\RayAHRS\\RayAHRS\\output\\Phi.txt");
+	WriteData(Ttheta,count,"D:\\github\\MyAHRS\\RayAHRS\\RayAHRS\\output\\Theta.txt");
+	WriteData(Ppsi,count,"D:\\github\\MyAHRS\\RayAHRS\\RayAHRS\\output\\Psi.txt");
 	//cout<<q0<<'\n';
 	//cout<<phi<<'\n';
 	//cout<<theta<<'\n';
