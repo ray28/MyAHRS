@@ -1,2 +1,5 @@
-﻿  RayAHRS.cpp
+﻿  EKF.cpp
+d:\github\myahrs\rayahrs\rayahrs\ekf.cpp(32): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
+d:\github\myahrs\rayahrs\rayahrs\ekf.cpp(37): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
+d:\github\myahrs\rayahrs\rayahrs\ekf.cpp(38): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
   RayAHRS.vcxproj -> D:\github\MyAHRS\RayAHRS\Debug\RayAHRS.exe

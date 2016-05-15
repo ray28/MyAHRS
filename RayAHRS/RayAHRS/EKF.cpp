@@ -19,15 +19,23 @@ float Ra = 3.8034f;//测量噪声
 float Rg = 58.2f;//测量噪声
 
 
+
 void EKF(float gx, float gy, float gz, float ax, float ay, float az)
 {
 	float phi_acc = 0.0f, theta_acc = 0.0f;
 	float Kga = 0.0f , Kgg = 0.0f;
 	float Xx = 0.0f , Xy = 0.0f;
-	//--------------------acc_angle calculate-------------------//
+	float recipNorm = 0.0f;
 
-	phi_acc = atan2(ay, sqrt(az * az + u * ax * ax));   
-	theta_acc = -atan2(ax, sqrt(ay * ay + az * az));   
+	//--------------------acc_angle calculate-------------------//
+	// Normalise accelerometer measurement
+	recipNorm = sqrt(ax * ax + ay * ay + az * az);
+	ax /= recipNorm;
+	ay /= recipNorm;
+	az /= recipNorm;
+
+	phi_acc = atan2(ay, sqrt(az * az + ax * ax));
+	theta_acc = -atan2(ax, sqrt(az * az+ u * ay * ay));   
 	phi_acc *=   180 / PI;   // 得到角度并转换为度 ROLL
 	theta_acc  *= 180 / PI;   // 得到角度并转换为度 Pitch
 
@@ -40,7 +48,7 @@ void EKF(float gx, float gy, float gz, float ax, float ay, float az)
 	theta += gy * dt;
 	psi += gz * dt;
 
-	/*
+/*	
 	phi = phi_acc;
 	theta = theta_acc;
 	psi = gz * dt;
@@ -54,7 +62,7 @@ void EKF(float gx, float gy, float gz, float ax, float ay, float az)
 	phi_bias += phi - phi_acc;	
 	theta_bias += theta - theta_acc;
 */
-	Xx = phi_Karman;
+/*	Xx = phi_Karman;
 	Xy = theta_Karman;
 
 	pa += Q;
@@ -68,5 +76,5 @@ void EKF(float gx, float gy, float gz, float ax, float ay, float az)
 
 	pa = (1 - Kga)*pa;//更新t状态下协方差(5)
 	pg = (1 - Kgg)*pg;//更新t状态下协方差(5)
-/**/
+*/
 }

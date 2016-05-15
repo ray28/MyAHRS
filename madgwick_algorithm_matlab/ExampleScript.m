@@ -67,11 +67,13 @@ linkaxes(axis, 'x');
 %AHRS = MadgwickAHRS('SamplePeriod', 1/256, 'Beta', 0.1);
  AHRS = MahonyAHRS('SamplePeriod', 1/256, 'Kp', 0.5);
 
+
 quaternion = zeros(length(time), 4);
 for t = 1:length(time)
     %AHRS.Update(Gyroscope(t,:) * (pi/180), Accelerometer(t,:), Magnetometer(t,:));	% gyroscope units must be radians
     AHRS.UpdateIMU(Gyroscope(t,:) * (pi/180), Accelerometer(t,:));	% gyroscope units must be radians
     quaternion(t, :) = AHRS.Quaternion;
+
 end
 
 %% Plot algorithm output as Euler angles
@@ -81,6 +83,7 @@ end
 % See: http://en.wikipedia.org/wiki/Gimbal_lock
 
 euler = quatern2euler(quaternConj(quaternion)) * (180/pi);	% use conjugate for sensor frame relative to Earth and convert to degrees.
+   
 
 figure('Name', 'Euler Angles');
 hold on;
@@ -134,14 +137,33 @@ fclose(fid);
 fid = fopen('D:\\github\\MyAHRS\\RayAHRS\\RayAHRS\\output\\Theta.txt','r');
 Qq1=fscanf(fid,'%f');
 fclose(fid);
+fid = fopen('D:\\github\\MyAHRS\\RayAHRS\\RayAHRS\\output\\Psi.txt','r');
+Qq2=fscanf(fid,'%f');
+fclose(fid);
+
 figure('Name', 'q');
+axis(1) = subplot(3,1,1);
 hold on;
-    %plot(time, quaternion(:,4), 'r');
-    %plot(time, Qq0, 'b');
     plot(time, euler(:,1), 'r');
+    %plot(time,  (Accelerometer(:,1) +0.1), 'r');
     plot(time, Qq0, 'g');
-   %plot(time, Qq1, 'b');
+    legend('X', 'Y');
 hold off;
+axis(2) = subplot(3,1,2);
+hold on;
+    plot(time, euler(:,2), 'r');
+   %plot(time,  (Accelerometer(:,2) +0.1), 'r');
+    plot(time, Qq1, 'g');
+    legend('X', 'Y');
+hold off;
+axis(3) = subplot(3,1,3);
+hold on;
+    plot(time, euler(:,3), 'r');
+    %plot(time,  (Accelerometer(:,3) +0.1), 'r');
+    plot(time, Qq2, 'g');
+    legend('X', 'Y');
+hold off;
+
 disp(var(Qq1-euler(:,2)));
 
 %% End of script
