@@ -132,7 +132,7 @@ int _tmain(int argc, _TCHAR* argv[])
 		Gy[k]*=(PI/180.0f);
 		Gz[k]*=(PI/180.0f);
 
-		/*	
+	/*		
 		MahonyAHRSupdateIMU( Gx[k], Gy[k], Gz[k], Ax[k], Ay[k], Az[k]);
 		quatern2euler( q0,  q1,  q2,  q3) ;
 	*/
@@ -143,13 +143,15 @@ int _tmain(int argc, _TCHAR* argv[])
 		Qq1.push_back((float)q1);
 		Qq2.push_back((float)q2);
 		Qq3.push_back((float)q3);
-	
+	/*
 		Pphi.push_back((float)phi);
 		Ttheta.push_back((float)theta);
 		Ppsi.push_back((float)psi);
-		/*	Pphi.push_back((float)phi_Karman);
+	*/
+		Pphi.push_back((float)phi_Karman);
 		Ttheta.push_back((float)theta_Karman);
-		Ppsi.push_back((float)psi);*/
+		Ppsi.push_back((float)psi);
+
 	}
 	
 	WriteData(Qq0,count,"D:\\github\\MyAHRS\\RayAHRS\\RayAHRS\\output\\Q0.txt");

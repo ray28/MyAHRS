@@ -64,9 +64,13 @@ linkaxes(axis, 'x');
 
 %% Process sensor data through algorithm
 
-%AHRS = MadgwickAHRS('SamplePeriod', 1/256, 'Beta', 0.1);
- AHRS = MahonyAHRS('SamplePeriod', 1/256, 'Kp', 0.5);
-
+AHRS = MadgwickAHRS('SamplePeriod', 1/256, 'Beta', 0.1);
+%AHRS = MahonyAHRS('SamplePeriod', 1/256, 'Kp', 0.5);
+ 
+Gangel = zeros(length(time), 3);
+Gx=0;
+Gy=0;
+Gz=0;
 
 quaternion = zeros(length(time), 4);
 for t = 1:length(time)
@@ -74,6 +78,13 @@ for t = 1:length(time)
     AHRS.UpdateIMU(Gyroscope(t,:) * (pi/180), Accelerometer(t,:));	% gyroscope units must be radians
     quaternion(t, :) = AHRS.Quaternion;
 
+    
+    Gx=Gx+Gyroscope(t,1)* (1/256);
+    Gangel(t,1) =Gx;
+    Gy=Gy+Gyroscope(t,2)* (1/256);
+    Gangel(t,2) =Gy;
+    Gz=Gz+Gyroscope(t,3)* (1/256);
+    Gangel(t,3) =Gz;
 end
 
 %% Plot algorithm output as Euler angles
@@ -146,24 +157,27 @@ axis(1) = subplot(3,1,1);
 hold on;
     plot(time, euler(:,1), 'r');
     %plot(time,  (Accelerometer(:,1) +0.1), 'r');
-    plot(time, Qq0, 'g');
-    legend('X', 'Y');
+    plot(time, Gangel(:,1), 'g');
+    plot(time, Qq0, 'b');
+    legend('X', 'Y', 'Z');
 hold off;
 axis(2) = subplot(3,1,2);
 hold on;
     plot(time, euler(:,2), 'r');
-   %plot(time,  (Accelerometer(:,2) +0.1), 'r');
-    plot(time, Qq1, 'g');
-    legend('X', 'Y');
+    %plot(time,  (Accelerometer(:,2) +0.1), 'r');
+    plot(time, Gangel(:,2)+1, 'g');
+    plot(time, Qq1, 'b');
+    legend('X', 'Y', 'Z');
 hold off;
 axis(3) = subplot(3,1,3);
 hold on;
     plot(time, euler(:,3), 'r');
     %plot(time,  (Accelerometer(:,3) +0.1), 'r');
-    plot(time, Qq2, 'g');
-    legend('X', 'Y');
+    plot(time, Gangel(:,3)+1, 'g');
+    plot(time, Qq2, 'b');
+    legend('X', 'Y', 'Z');
 hold off;
 
-disp(var(Qq1-euler(:,2)));
+disp((Qq1(400)-euler(400,2)));
 
 %% End of script
