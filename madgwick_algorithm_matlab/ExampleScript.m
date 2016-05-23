@@ -64,8 +64,8 @@ linkaxes(axis, 'x');
 
 %% Process sensor data through algorithm
 
-AHRS = MadgwickAHRS('SamplePeriod', 1/256, 'Beta', 0.1);
-%AHRS = MahonyAHRS('SamplePeriod', 1/256, 'Kp', 0.5);
+%AHRS = MadgwickAHRS('SamplePeriod', 1/256, 'Beta', 0.1);
+AHRS = MahonyAHRS('SamplePeriod', 1/256, 'Kp', 0.5);
  
 Gangel = zeros(length(time), 3);
 Gx=0;

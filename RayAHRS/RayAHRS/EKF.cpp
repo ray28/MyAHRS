@@ -14,7 +14,7 @@ volatile float phi_Karman = 0.0f;
 volatile float theta_Karman = 0.0f;
 float pa = 0.0f;
 float pg = 0.0f;
-float Q = 1e-5; //系统噪声
+float Q = 1e-3; //系统噪声
 float Ra = 9.0f;//测量噪声
 float Rg = 0.01f;//测量噪声
 
@@ -62,8 +62,12 @@ void EKF(float gx, float gy, float gz, float ax, float ay, float az)
 	phi_bias += phi - phi_acc;	
 	theta_bias += theta - theta_acc;
 */
+	/*   ////方法一
 	Xx = phi_Karman;
 	Xy = theta_Karman;
+	*/
+	Xx = phi_Karman + gx * dt;
+	Xy = theta_Karman + gy * dt;
 
 	pa += Q;
 	pg += Q;
@@ -71,8 +75,12 @@ void EKF(float gx, float gy, float gz, float ax, float ay, float az)
 	Kga = pa / (pa + Ra);//卡尔曼增益(4)
 	Kgg = pg / (pg + Rg);//卡尔曼增益(4)
 
+	/*    ////方法一
 	phi_Karman = Xx + 0.5*(Kga*(phi_acc - Xx) + Kgg*(phi - Xx));//最优化估算值(3)
 	theta_Karman = Xy + 0.5*(Kga*(theta_acc - Xy) + Kgg*(theta - Xy));//最优化估算值(3)
+	*/
+	phi_Karman = Xx + Kga*(phi_acc - Xx) ;//最优化估算值(3)
+	theta_Karman = Xy + Kga*(theta_acc - Xy);//最优化估算值(3)
 
 	pa = (1 - Kga)*pa;//更新t状态下协方差(5)
 	pg = (1 - Kgg)*pg;//更新t状态下协方差(5)

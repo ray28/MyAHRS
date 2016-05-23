@@ -3,6 +3,4 @@ d:\github\myahrs\rayahrs\rayahrs\ekf.cpp(17): warning C4305: “初始化”: �
 d:\github\myahrs\rayahrs\rayahrs\ekf.cpp(32): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
 d:\github\myahrs\rayahrs\rayahrs\ekf.cpp(37): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
 d:\github\myahrs\rayahrs\rayahrs\ekf.cpp(38): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
-d:\github\myahrs\rayahrs\rayahrs\ekf.cpp(74): warning C4244: “=”: 从“double”转换到“volatile float”，可能丢失数据
-d:\github\myahrs\rayahrs\rayahrs\ekf.cpp(75): warning C4244: “=”: 从“double”转换到“volatile float”，可能丢失数据
-  RayAHRS.vcxproj -> D:\Github\MyAHRS\RayAHRS\Debug\RayAHRS.exe
+  RayAHRS.vcxproj -> D:\github\MyAHRS\RayAHRS\Debug\RayAHRS.exe
