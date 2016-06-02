@@ -165,7 +165,7 @@ void MahonyAHRSupdateIMU(float gx, float gy, float gz, float ax, float ay, float
 		// Estimated direction of gravity and vector perpendicular to magnetic flux
 		halfvx = q1 * q3 - q0 * q2;
 		halfvy = q0 * q1 + q2 * q3;
-		halfvz = q0 * q0 - 0.5f + q3 * q3;
+		halfvz = q0 * q0 - q1 * q1 - q2 * q2 + q3 * q3;
 	
 		// Error is sum of cross product between estimated and measured direction of gravity
 		halfex = (ay * halfvz - az * halfvy);
@@ -203,7 +203,7 @@ void MahonyAHRSupdateIMU(float gx, float gy, float gz, float ax, float ay, float
 	q0 += (-qb * gx - qc * gy - q3 * gz);
 	q1 += (qa * gx + qc * gz - q3 * gy);
 	q2 += (qa * gy - qb * gz + q3 * gx);
-	q3 += (qa * gz + qb * gy - qc * gx); 
+	q3 += (qa * gz + qb * gy - qc * gx);
 	
 	// Normalise quaternion
 	recipNorm = invSqrt(q0 * q0 + q1 * q1 + q2 * q2 + q3 * q3);

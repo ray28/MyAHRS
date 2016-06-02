@@ -30,7 +30,7 @@
     <ClInclude Include="quatern2euler.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="EKF.h">
+    <ClInclude Include="KF.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -47,7 +47,7 @@
     <ClCompile Include="MahonyAHRS.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="EKF.cpp">
+    <ClCompile Include="KF.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

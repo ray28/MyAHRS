@@ -83,7 +83,7 @@
     <ClInclude Include="quatern2euler.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
-    <ClInclude Include="EKF.h" />
+    <ClInclude Include="KF.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="MahonyAHRS.cpp" />
@@ -93,7 +93,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="EKF.cpp" />
+    <ClCompile Include="KF.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

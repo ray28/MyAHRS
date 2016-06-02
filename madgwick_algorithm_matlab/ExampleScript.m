@@ -71,9 +71,10 @@ Gangel = zeros(length(time), 3);
 Gx=0;
 Gy=0;
 Gz=0;
-
+ 
 quaternion = zeros(length(time), 4);
 for t = 1:length(time)
+ 
     %AHRS.Update(Gyroscope(t,:) * (pi/180), Accelerometer(t,:), Magnetometer(t,:));	% gyroscope units must be radians
     AHRS.UpdateIMU(Gyroscope(t,:) * (pi/180), Accelerometer(t,:));	% gyroscope units must be radians
     quaternion(t, :) = AHRS.Quaternion;
